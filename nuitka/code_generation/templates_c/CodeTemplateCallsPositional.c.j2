@@ -76,6 +76,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
 
         Py_LeaveRecursiveCall();
 
+        {{ CHECK_OBJECTS(args, args_count) }}
         CHECK_OBJECT_X(result);
 
         return result;
@@ -110,6 +111,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
 
             PyObject *result = Nuitka_CallFunctionPosArgs(method->m_function, args, {{args_count}});
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return result;
@@ -165,6 +167,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
 
             Py_LeaveRecursiveCall();
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return result;
@@ -191,6 +194,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
 #ifdef _NUITKA_FULL_COMPAT
             Py_LeaveRecursiveCall();
 #endif
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return Nuitka_CheckFunctionResult(called, result);
@@ -220,6 +224,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
             Py_LeaveRecursiveCall();
 #endif
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return Nuitka_CheckFunctionResult(called, result);
@@ -304,6 +309,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
             Py_LeaveRecursiveCall();
 #endif
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return Nuitka_CheckFunctionResult(called, result);
@@ -328,6 +334,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
         PyObject *result = _PyFunction_Vectorcall(called, args, {{args_count}}, NULL);
 {% endif %}
 #endif
+        {{ CHECK_OBJECTS(args, args_count) }}
         CHECK_OBJECT_X(result);
 
         return result;
@@ -494,6 +501,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
             Py_XDECREF(pos_args);
 {% endif %}
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(obj);
 
             return obj;
@@ -577,6 +585,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
             return NULL;
         }
 
+        {{ CHECK_OBJECTS(args, args_count) }}
         CHECK_OBJECT_X(obj);
 
         return obj;
@@ -592,6 +601,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
             PyObject *result = func(called, args, {{args_count}}, NULL);
 {% endif %}
 
+            {{ CHECK_OBJECTS(args, args_count) }}
             CHECK_OBJECT_X(result);
 
             return Nuitka_CheckFunctionResult(called, result);
@@ -620,6 +630,7 @@ PyObject *CALL_FUNCTION_WITH_ARGS{{args_count}}(PyObject *called, PyObject *cons
 {% endif %}
 {% endif %}
 
+    {{ CHECK_OBJECTS(args, args_count) }}
     CHECK_OBJECT_X(result);
 
     return result;
