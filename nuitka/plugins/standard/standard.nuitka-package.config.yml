@@ -2288,17 +2288,6 @@
     - find-dlls-near-module:
         - 'shiboken2'
 
-- module-name: 'PySide6'
-  options:
-    checks:
-      - description: 'PySide6 is a GUI framework'
-        console: 'recommend'
-        when: 'plugin("pyside6")'
-
-  import-hacks:
-    - find-dlls-near-module:
-        - 'shiboken6'
-
 - module-name: 'PySide6.QtCore'
   implicit-imports:
     - depends:
@@ -2316,6 +2305,16 @@
           from PySide6 import QtCore
           orig_connect = QtCore.SignalInstance.connect
           QtCore.SignalInstance.connect = myconnect
+
+  options:
+    checks:
+      - description: 'PySide6 is a GUI framework'
+        console: 'recommend'
+        when: 'plugin("pyside6")'
+
+  import-hacks:
+    - find-dlls-near-module:
+        - 'shiboken6'
 
 - module-name: 'python_utils.terminal'
   anti-bloat:
